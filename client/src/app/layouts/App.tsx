@@ -1,43 +1,37 @@
-import { Fragment, useEffect, useState } from "react";
-import { Product } from "../models/product";
+import { Fragment, useState } from "react";
 import Catalog from "../../features/catalog/Catalog";
 import Header from "./Header";
-import { Container, CssBaseline } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 
 function App() {
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [darkMode, setDarkMode] = useState(false);
+  const paletteType = darkMode ? "dark" : "light";
+  const theme = createTheme({
+    palette: {
+      mode: paletteType,
+      background: {
+        default: paletteType === "light" ? "#eaeaea" : "#121212"
+      }
+    }
+  })
 
-  // get the products from the API.
-  useEffect(() => {
-    fetch("http://localhost:5000/api/Products")
-      .then(response => response.json())
-      .then(data => setProducts(data))
-  }, [])
+  function ToggleDarkMode () {
+    setDarkMode(!darkMode)
+  };
 
-  function addProduct() {
-    setProducts(prevState => [...prevState,
-    {
-      id: prevState.length + 101,
-      name: "product" + (prevState.length + 1),
-      price: (prevState.length * 100) + 100,
-      brand: "some brand",
-      description: "some description",
-      pictureUrl: "http://picsum.photos/200"
-    }])
-  }
-
-  // Page View
-  // *********
 
   return (
     <Fragment>
-      <CssBaseline />
-      <Header />
-      <Container>
-        <Catalog products={products} addProduct={addProduct} />
-      </Container>
+      <ThemeProvider theme={theme} >
+        <CssBaseline />
+        <Header darkMode={darkMode} ToggleDarkMode={ToggleDarkMode}/>
+        <Container>
+          <Catalog />
+        </Container>
+      </ThemeProvider>
+
     </Fragment>
   )
 }

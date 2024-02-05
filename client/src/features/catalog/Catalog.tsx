@@ -1,18 +1,22 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Product } from "../../app/models/product";
-import { Button } from "@mui/material";
 import ProductList from "./ProductList";
 
-interface Props {
-    products: Product[];
-    addProduct: () => void;
-}
 
-export default function Catalog({products, addProduct}: Props ) {
+export default function Catalog() {
+
+    const [products, setProducts] = useState<Product[]>([]);
+
+    // get the products from the API.
+    useEffect(() => {
+        fetch("http://localhost:5000/api/Products")
+            .then(response => response.json())
+            .then(data => setProducts(data))
+    }, [])
+
     return (
         <Fragment>
-            <ProductList products={products}/>
-            <Button variant="contained" onClick={addProduct} >Add Product</Button>
+            <ProductList products={products} />
         </Fragment>
     )
 }
