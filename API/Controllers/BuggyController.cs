@@ -4,24 +4,28 @@ namespace API.Controllers
 {
     public class BuggyController : BaseApiController
     {
+        // status 404
         [HttpGet("not-found")]
         public ActionResult GetNotFound()
         {
             return NotFound();
         }
 
+        // status 400
         [HttpGet("bad-request")]
         public ActionResult GetBadRequest()
         {
             return BadRequest(new ProblemDetails{Title = "This is a bad request"});
         }
 
+        // status 401
         [HttpGet("unauthorised")]
         public ActionResult GetUnauthorised()
         {
             return Unauthorized();
         }
 
+        // status 400
         [HttpGet("validation-error")]
         public ActionResult GetValidationError()
         {
@@ -30,6 +34,7 @@ namespace API.Controllers
             return ValidationProblem();
         }
 
+        // status 500
         [HttpGet("server-error")]
         public ActionResult GetServerError()
         {
