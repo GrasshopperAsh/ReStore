@@ -2,7 +2,8 @@ import { Fragment, useState } from "react";
 import Header from "./Header";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
   return (
     <Fragment>
       <ThemeProvider theme={theme} >
+        <ToastContainer position="bottom-right" theme="colored" hideProgressBar />
         <CssBaseline />
         <Header darkMode={darkMode} ToggleDarkMode={ToggleDarkMode}/>
         <Container>
