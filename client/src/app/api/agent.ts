@@ -36,7 +36,7 @@ const TestErrors = {
     get500Error: () => requests.get("buggy/server-error"),
     getValidationError: () => requests.get("buggy/validation-error")
 }
-
+    
 
 const agent = {
     Catalog,
