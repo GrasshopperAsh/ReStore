@@ -18,7 +18,7 @@ function App() {
     }
   })
 
-  function ToggleDarkMode () {
+  function ToggleDarkMode() {
     setDarkMode(!darkMode)
   };
 
@@ -28,7 +28,7 @@ function App() {
       <ThemeProvider theme={theme} >
         <ToastContainer position="bottom-right" theme="colored" hideProgressBar />
         <CssBaseline />
-        <Header darkMode={darkMode} ToggleDarkMode={ToggleDarkMode}/>
+        <Header darkMode={darkMode} ToggleDarkMode={ToggleDarkMode} />
         <Container>
           <Outlet />
         </Container>
